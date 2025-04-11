@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Tickets,
-  Shapes,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { LayoutDashboard, Tickets, Shapes, ChevronDown, ChevronUp, Wallet, History, HelpCircle } from "lucide-react";
+import { Card, Space } from 'antd';
+
 
 const Sidebar = ({ user, festDetails }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
-  console.log(festDetails);
 
   const dashboardOptions = [
     {
@@ -34,21 +29,21 @@ const Sidebar = ({ user, festDetails }) => {
         { name: "View Departments", link: "/admin/departments" },
       ],
     },
-    // {
-    //   name: "Orders Management",
-    //   icon: <LocalShippingRoundedIcon />,
-    //   link: "/admin/orders",
-    // },
-    // {
-    //   name: "Reviews",
-    //   icon: <ForumRoundedIcon />,
-    //   link: "/admin/reviews",
-    // },
-    // {
-    //   name: "Settings",
-    //   icon: <TuneRoundedIcon />,
-    //   link: "/admin/settings",
-    // },
+    {
+      name: "My Wallet",
+      icon: <Wallet />,
+      link: "/admin/wallet",
+    },
+    {
+      name: "History Data",
+      icon: <History />,
+      link: "/admin/history",
+    },
+    {
+      name: "Helps",
+      icon: <HelpCircle />,
+      link: "/admin/helps",
+    },
   ];
 
   const toggleDropdown = (index) => {
@@ -56,30 +51,29 @@ const Sidebar = ({ user, festDetails }) => {
   };
 
   return (
-    <div className="px-4 py-8 sticky left-0 h-screen overflow-y-auto bg-gray-100 w-72 shadow-md font-medium">
-      <div className="text-center w-full">
+      <div className="h-full bg-transparent">
+      <div className="text-center w-full space-x-4 flex items-center justify-center">
         <div className="text-center">
           <img
             src={festDetails.logo.imageUrl}
             alt="Fest logo"
-            className="w-16 h-16 rounded-full shadow-md"
+            className="w-12 h-12 rounded-full shadow-md"
           />
         </div>
         <div>
-          <h className="text-2xl font-bold uppercase">{festDetails.festName}</h>
+          <h1 className="text-2xl font-extrabold capitalize">{festDetails.festName}</h1>
         </div>
       </div>
-      <h1>Hello, {user.name}</h1>
-      <ul className="text-sm text-neutral-700">
+      <ul className="text-sm text-neutral-700 mt-8">
         {dashboardOptions.map((option, index) => (
-          <li key={index} className="mb-1c my-2">
+          <li key={index} className="mb-1 my-1">
             {option.subMenu ? (
               <>
                 <button
                   onClick={() => toggleDropdown(index)}
-                  className="flex items-center w-full bg-white px-2 py-2 text-left hover:bg-gray-200 transition-all duration-500 ease-in-out rounded-lg"
+                  className="flex items-center w-full justify-start px-2 py-2 hover:scale-105 transition-all duration-500 ease-in-out rounded-lg text-left"
                 >
-                  <span className="mr-4">{option.icon}</span>
+                  <span className="mr-3">{option.icon}</span>
                   <span>{option.name}</span>
                   <span className="ml-auto">
                     {openDropdown === index ? <ChevronUp /> : <ChevronDown />}
@@ -91,7 +85,7 @@ const Sidebar = ({ user, festDetails }) => {
                       <li key={subIndex}>
                         <Link
                           to={sub.link}
-                          className="block px-4 py-2 text-gray-700 bg-white my-2 hover:bg-gray-100 rounded"
+                          className="block px-4 py-2 my-2 hover:scale-105 duration-500 rounded"
                         >
                           {sub.name}
                         </Link>
@@ -103,7 +97,7 @@ const Sidebar = ({ user, festDetails }) => {
             ) : (
               <Link
                 to={option.link}
-                className="flex items-center bg-white px-4 py-2 hover:bg-gray-200 rounded-lg"
+                className="flex items-center px-2 py-2 hover:scale-105 duration-500 rounded-lg text-left"
               >
                 <span className="mr-4">{option.icon}</span>
                 <span>{option.name}</span>

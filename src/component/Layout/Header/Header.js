@@ -55,7 +55,7 @@ const Header = ({logoImage, festName}) => {
                     {navItems.map((item, index) => {
                         return(
 
-                            <li className={`mx-2 lg:mx-8 text-[0.7rem] lg:text-[1.1rem] drop-shadow-2xl hover:text-purple-600 hover:font-medium hover:scale-110 duration-300`} key={index}>
+                            <li className={`mx-2 lg:mx-8 text-[0.5rem] lg:text-[0.9rem] drop-shadow-2xl hover:text-purple-600 hover:font-medium hover:scale-110 duration-300`} key={index}>
                             <Link to={item.link}>
                             {item.name}
                             </Link>
